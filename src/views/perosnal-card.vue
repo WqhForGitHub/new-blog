@@ -10,15 +10,15 @@
       <div class="info-container">
         <div class="publishNum">
           <div>发表</div>
-          <div>{{ loginInfo.publishNum }}</div>
+          <div>{{ loginInfo.count }}</div>
         </div>
         <div class="likeNum">
           <div>点赞</div>
-          <div>0</div>
+          <div>{{ loginInfo.likeNum }}</div>
         </div>
         <div class="commentNum">
           <div>评论</div>
-          <div>0</div>
+          <div>{{ loginInfo.commentNum }}</div>
         </div>
       </div>
     </a-card>

@@ -70,7 +70,14 @@ const onFinish = async() => {
     router.push({
       name: 'blogHome'
     })
-    store.commit('setUserInfo', loginStatus.data.data[0])
+
+    let obj = {
+      ...loginStatus.data.data[0],
+      likeNum: loginStatus.data.likeNum,
+      commentNum: loginStatus.data.commentNum,
+      count: loginStatus.data.count
+    }
+    store.commit('setUserInfo', obj)
     localStorage.setItem('token', loginStatus.data.token)
     console.log('res.data.token: ', loginStatus.data.token);
     // 登录成功
