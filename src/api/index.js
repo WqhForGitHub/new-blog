@@ -12,23 +12,17 @@ instance.interceptors.request.use(
     }
 
     return config
-  },
-  (error) => {
-    return Promise.reject(error)
   }
 )
 
 instance.interceptors.response.use(
   (config) => {
     return config
-  },
-  (error) => {
-    return Promise.reject(error)
   }
 )
 
 export function get(url, params) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     instance
       .get(url, {
         params
@@ -36,21 +30,19 @@ export function get(url, params) {
       .then(function (response) {
         resolve(response)
       })
-      .catch(function (error) {
-        reject(error)
+      .catch(function () {
       })
   })
 }
 
 export function post(url, data) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     instance
       .post(url, data)
       .then(function (response) {
         resolve(response)
       })
-      .catch(function (error) {
-        reject(error)
+      .catch(function () {
       })
   })
 }

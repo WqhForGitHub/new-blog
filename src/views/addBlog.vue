@@ -32,6 +32,11 @@
 import { reactive, ref, toRaw } from 'vue';
 import { AddBlog } from '../api/blog'
 
+import { useStore } from 'vuex'
+let store = useStore();
+let loginInfo = store.state.userInfo
+console.log('loginInfo: ', loginInfo);
+
 let loading = ref(false)
 const formRef = ref();
 const labelCol = {
@@ -116,7 +121,18 @@ const onSubmit = () => {
     .then(() => {
       console.log('values', formState, toRaw(formState));
       loading.value = true
-      AddBlog(toRaw(formState)).then((res) => {
+
+      let obj = {
+        blogTitle: formState.blogTitle,
+        blogMotto: formState.motto,
+        tag: formState.type,
+        isMarked: formState.isMarked,
+        blogContent: formState.content,
+        author: loginInfo.userName,
+        pictureUrl: '',
+        userId: loginInfo.userId
+      }
+      AddBlog({ ...obj }).then((res) => {
         if (res.data.code === 0) {
           loading.value = false
         }
