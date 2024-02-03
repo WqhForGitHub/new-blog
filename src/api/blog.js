@@ -33,29 +33,3 @@ export const addLikeNum = (data) => {
 export const AddBlog = (data) => {
   return post(`/blog`, data)
 }
-/*
-// 添加博客
-export const AddBlog = (params: addBlogModel) => {
-  return HttpClient.post<addBlogModel>("/blog", params);
-};
-
-// 调用点赞接口
-export const addWatched = (params: addWatchModel) => {
- return HttpClient.post<addWatchModel>("/addWatchedNum", params);
-}; 
-
-// 调用点赞接口
-export const addLikeNum = (params: addWatchModel) => {
-  return HttpClient.post<addWatchModel>("/addLikeNum", params);
-};
-
-// 发表评论接口
-export const publistComments = (params: ListModel) => {
-  return HttpClient.post<ListModel>("/publishComments", params);
-}
-
-// 发表子评论接口
-export const publistSubComments = (params: ListModel) => {
-  return HttpClient.post<ListModel>("/publishSubComments", params);
-}
-*/

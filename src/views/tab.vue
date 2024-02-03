@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false" style="width: 300px">
-    <div class="tab-item" @click="mouseOver('tab1')">
+    <div class="tab-item" @click="debounceSearch('tab1')">
       <div class="svg-icon">
         <svg v-if="!obj.tab1" t="1706275824695" class="icon" viewBox="0 0 1024 1024" version="1.1"
           xmlns="http://www.w3.org/2000/svg" p-id="3926" width="200" height="200">
@@ -17,7 +17,7 @@
       </div>
       <div :style="{ 'color': obj.tab1 ? '#1677ff' : '#000' }">综合</div>
     </div>
-    <div class="tab-item" @click="mouseOver('tab2')">
+    <div class="tab-item" @click="debounceSearch('tab2')">
       <div class="svg-icon">
         <svg v-if="!obj.tab2" t="1706276261338" class="icon" viewBox="0 0 1194 1024" version="1.1"
           xmlns="http://www.w3.org/2000/svg" p-id="6192" width="200" height="200">
@@ -35,7 +35,7 @@
       </div>
       <div :style="{ 'color': obj.tab2 ? '#1677ff' : '#000' }">前端</div>
     </div>
-    <div class="tab-item" @click="mouseOver('tab3')">
+    <div class="tab-item" @click="debounceSearch('tab3')">
       <div class="svg-icon">
         <svg v-if="obj.tab3" t="1706276335107" class="icon" viewBox="0 0 1024 1024" version="1.1"
           xmlns="http://www.w3.org/2000/svg" p-id="11913" width="200" height="200">
@@ -52,7 +52,7 @@
       </div>
       <div :style="{ 'color': obj.tab3 ? '#1677ff' : '#000' }">后端</div>
     </div>
-    <div class="tab-item" @click="mouseOver('tab4')">
+    <div class="tab-item" @click="debounceSearch('tab4')">
       <div class="svg-icon">
         <svg v-if="obj.tab4" t="1706276358030" class="icon" viewBox="0 0 1024 1024" version="1.1"
           xmlns="http://www.w3.org/2000/svg" p-id="13887" width="200" height="200">
@@ -83,7 +83,7 @@
       </div>
       <div :style="{ 'color': obj.tab4 ? '#1677ff' : '#000' }">大数据</div>
     </div>
-    <div class="tab-item" @click="mouseOver('tab5')">
+    <div class="tab-item" @click="debounceSearch('tab5')">
       <div class="svg-icon">
         <svg v-if="obj.tab5" t="1706276377441" class="icon" viewBox="0 0 1024 1024" version="1.1"
           xmlns="http://www.w3.org/2000/svg" p-id="15708" width="200" height="200">
@@ -124,6 +124,8 @@
 import { reactive, defineEmits } from 'vue';
 let emits = defineEmits('update-tab')
 
+let timer = reactive(null)
+
 let obj = reactive({
   tab1: true,
   tab2: false,
@@ -141,9 +143,11 @@ let obj1 = reactive({
   'tab5': '0', // ios
 })
 
+/*
+ *  更新tab
+ */
 const mouseOver = (index) => {
   Object.keys(obj).forEach(item => {
-    // obj1.item
     if (item === index) {
       obj[item] = true
       emits('update-tab', obj1[item])
@@ -152,6 +156,17 @@ const mouseOver = (index) => {
     }
   })
 }
+
+/*
+ * 防抖函数
+ */
+function debounceSearch(index) {
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    mouseOver(index)
+  }, 50);
+}
+
 </script>
 
 <style lang="scss" scoped>
